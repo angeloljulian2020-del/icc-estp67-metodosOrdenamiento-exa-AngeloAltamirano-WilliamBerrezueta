@@ -1,51 +1,51 @@
 package models;
 
-import java.util.Arrays;
-
 public class Brand {
+    private String brandName;
+    private CarModel[] models;
 
-  public int getTotalValidYears() {
-    // Implementar aquí
-    int total = 0;
-    for (CarModel model : models) {
-      for (CarYear year : model.getYears()) {
-        if (year.isValid()) {
-          total += 1;
-        }
-      }
-
+    public Brand(String brandName, CarModel[] models) {
+        this.brandName = brandName;
+        this.models = models;
     }
-    return total;
 
-  }
+    
+    public int getTotalValidYears() {
+        int totalValidYears = 0;
+        
+        if (models != null) {
+            for (CarModel model : models) {
+                if (model != null && model.getYears() != null) {
+                    for (CarYear carYear : model.getYears()) {
+                        if (carYear != null && carYear.isValid()) {
+                            totalValidYears++;
+                        }
+                    }
+                }
+            }
+        }
+        return totalValidYears;
+    }
 
-  private String brandName;
-  private CarModel[] models;
+    public String getBrandName() {
+        return brandName;
+    }
 
-  public String getBrandName() {
-    return brandName;
-  }
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
 
-  public void setBrandName(String brandName) {
-    this.brandName = brandName;
-  }
+    public CarModel[] getModels() {
+        return models;
+    }
 
-  public CarModel[] getModels() {
-    return models;
-  }
+    public void setModels(CarModel[] models) {
+        this.models = models;
+    }
 
-  public void setModels(CarModel[] models) {
-    this.models = models;
-  }
-
-  public Brand(String brandName, CarModel[] models) {
-    this.brandName = brandName;
-    this.models = models;
-  }
-
-  @Override
-  public String toString() {
-    return "Brand [brandName=" + brandName + ", models=" + Arrays.toString(models) + "]";
-  }
-
+   
+    @Override
+    public String toString() {
+        return "Brand{" + "brandName='" + brandName + '\'' + ", totalValidYears=" + getTotalValidYears() + '}';
+    }
 }
