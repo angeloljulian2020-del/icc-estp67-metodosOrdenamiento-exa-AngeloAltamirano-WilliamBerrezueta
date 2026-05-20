@@ -7,22 +7,22 @@ public class App {
 
     public static void main(String[] args) {
         BrandController controller = new BrandController();
+        Brand[] brands = createBrands();
 
-        
-        Brand[] brands = createBrands(); 
-        
         System.out.println("Original:");
-        printBrands(brands);
+        for (int i = 0; i < brands.length; i++) {
+            System.out.println(brands[i].getBrandName() + " - Años válidos: " + brands[i].getTotalValidYears());
+        }
         System.out.println();
 
-        
         brands = controller.sortBubbleDesc(brands);
 
         System.out.println("Ordenado por Bubble Sort descendente:");
-        printBrands(brands);
+        for (int i = 0; i < brands.length; i++) {
+            System.out.println(brands[i].getBrandName() + " - Años válidos: " + brands[i].getTotalValidYears());
+        }
         System.out.println();
 
-        
         System.out.println("Buscar marca con 7 años válidos que se ordenaron de mayor a menor:");
         Brand result1 = controller.binarySearchByValidYears(brands, 7, false);
         if (result1 != null) {
@@ -32,21 +32,12 @@ public class App {
         }
         System.out.println();
 
-        
         System.out.println("Buscar marca con 4 años válidos que se ordenaron de mayor a menor:");
         Brand result2 = controller.binarySearchByValidYears(brands, 4, false);
         if (result2 != null) {
             System.out.println("Encontrada: Marca: " + result2.getBrandName() + ", Total de años válidos: " + result2.getTotalValidYears());
         } else {
             System.out.println("No encontrada");
-        }
-    }
-
-    private static void printBrands(Brand[] brands) {
-        for (Brand b : brands) {
-            if (b != null) {
-                System.out.println(b.getBrandName() + " - Años válidos: " + b.getTotalValidYears());
-            }
         }
     }
 
